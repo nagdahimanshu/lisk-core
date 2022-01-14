@@ -1,0 +1,128 @@
+= Binary setup
+Mona Bärenfänger <mona@lightcurve.io>
+:description: How to install and setup a Lisk Core (binary distribution).
+:toc:
+// External URLs
+:url_set_path: https://opensource.com/article/17/6/set-path-linux
+// Project URLs
+
+The binary installation offers an easy and automated approach to set up Lisk Core.
+
+[[pre_install]]
+== Pre-installation
+
+To complete the installation some prerequisites need to be fulfilled.
+If you have already performed these, please proceed to the <<install, Installation>> chapter.
+
+=== Requirements
+
+Supported Platforms::
+* Ubuntu 18.04 (LTS) x86_64
+* Ubuntu 20.04 (LTS) x86_64
+* MacOS x86_64
+
+[[install]]
+== Installation
+
+This section details how to install Lisk Core using pre-built application packages.
+Once completed, you will have a functioning node on the Lisk Network.
+
+=== Download and execute the installation script
+
+Download Lisk Core:
+
+[tabs]
+====
+Mainnet::
++
+--
+*Linux:*
+
+[source,bash]
+----
+curl -o lisk-core.tar.gz https://downloads.lisk.com/lisk/mainnet/3.0.2/lisk-core-v3.0.2-linux-x64.tar.gz
+----
+
+*MacOS:*
+
+[source,bash]
+----
+curl -o lisk-core.tar.gz https://downloads.lisk.com/lisk/mainnet/3.0.2/lisk-core-v3.0.2-darwin-x64.tar.gz
+----
+--
+Testnet::
++
+--
+*Linux:*
+
+[source,bash]
+----
+curl -o lisk-core.tar.gz https://downloads.lisk.com/lisk/testnet/3.0.2/lisk-core-v3.0.2-linux-x64.tar.gz
+----
+
+*MacOS:*
+
+[source,bash]
+----
+curl -o lisk-core.tar.gz https://downloads.lisk.com/lisk/testnet/3.0.2/lisk-core-v3.0.2-darwin-x64.tar.gz
+----
+--
+====
+
+Unpack it, and add it to the system path, in order to use it in the terminal:
+
+[source,bash]
+----
+tar -xf ./lisk-core.tar.gz
+cd lisk-core
+./bin/lisk-core
+----
+
+[TIP]
+
+====
+
+You can make the `lisk-core` command available in the PATH, e.g. by executing
+
+[source,bash]
+----
+export PATH="$PATH:$HOME/lisk-core/bin"
+----
+
+See {url_set_path}[^] for more information
+
+To make `lisk-core` permanently available in the CLI, add the above snippet to `~/.bashrc`.
+
+To reload `.bashrc`, run the following command:
+
+[source,bash]
+----
+source ~/.bashrc
+----
+====
+
+=== Verify successful installation
+
+To verify that your Lisk node is up and running, execute the following command:
+
+[tabs]
+====
+Mainnet::
++
+--
+[source,bash]
+----
+lisk-core start --network mainnet
+----
+--
+Testnet::
++
+--
+[source,bash]
+----
+lisk-core start --network testnet
+----
+--
+====
+
+include::partial$core-post-installation.adoc[]

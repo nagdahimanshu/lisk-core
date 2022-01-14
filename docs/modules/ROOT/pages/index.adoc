@@ -1,0 +1,124 @@
+= What is Lisk Core?
+Mona Bärenfänger <mona@lightcurve.io>
+// Settings
+:description: References and guides how to setup, update and manage a Lisk Core node.
+:toc: preamble
+:page-no-previous: true
+:v_sdk: master
+:page-aliases: monitoring.adoc
+:imagesdir: ../assets/images
+// External URLs
+:url_faucet_testnet: https://testnet-faucet.lisk.com/
+:url_lisk_blog_betanet5: https://lisk.com/blog/development/launch-betanet-v5
+:url_lisk_desktop: https://lisk.com/wallet
+:url_nodejs: https://nodejs.org
+:url_postgresql: https://www.postgresql.org
+:url_redis: https://redis.io
+:url_semver: https://semver.org/
+:url_swagger: https://swagger.io
+// Project URLs
+:url_config: management/configuration.adoc
+:url_config_forging: management/forging.adoc
+:url_management_accounts: management/account-management.adoc
+:url_getting_started: setup/npm.adoc
+:url_setup: setup/index.adoc#distributions
+:url_setup_binary: setup/application.adoc
+:url_setup_npm: setup/npm.adoc
+:url_setup_snap: setup/snap.adoc
+:url_setup_docker: setup/docker.adoc
+:url_setup_source: setup/source.adoc
+:url_upgrade_binary: update/application.adoc
+:url_upgrade_commander: update/commander.adoc
+:url_upgrade_docker: update/docker.adoc
+:url_upgrade_source: update/source.adoc
+
+image:banner_core.png[Core]
+
+ifeval::[{page-component-version} !== master]
+
+IMPORTANT: To access the latest Lisk Core version, please xref:master@{page-component-name}::{page-relative}[click here].
+endif::[]
+
+== Getting started
+
+[[node]]
+=== What is a node?
+
+The Lisk blockchain is a decentralized network that consists of many different servers, (or nodes).
+Node operators are required to set up Lisk Core on a server, and then connect it to the desired network.
+
+There are over 600 nodes around the world that are maintained by individuals, and these nodes communicate with the network.
+For example, by broadcasting and receiving blocks or transactions from their peers.
+In addition, Lisk nodes are also required to forge/add new blocks to the blockchain.
+
+=== Who should operate a node?
+
+If you fall under one of the following categories listed below, then it is recommended to set up your own node:
+
+* *Exchanges* and other services that rely on a stable API interface to the network.
+* *Delegates* who have registered as a delegate and would like to actively forge.
+* *Users* who do not trust external sources and want to be in full control over their node.
+
+=== Why operate a node?
+
+- To have a private entry point to communicate with the network.
+This is especially important when running an exchange and implementing LSK tokens.
+- To create your own snapshots of the blockchain.
+- To create transactions and send them to the network.
+- To have the option to xref:{url_config_forging}[forge] new blocks, (assuming you are an active delegate).
+- To acquire full control in order to xref:{url_config}[configure] the node to your specific requirements.
+
+NOTE: To learn how to set up a node, please see the xref:{url_getting_started}[NPM setup] page.
+
+[[networks]]
+== Networks
+
+The Lisk Core can be connected to different networks.
+Please be aware that there are three key accessible public networks existing which are entirely independent of each other.
+These networks are described below.
+
+.Public networks of Lisk
+[cols="s,1*",options="header"]
+|===
+
+| | Network Identifier
+
+
+| Mainnet
+| `4c09e6a781fc4c7bdb936ee815de8f94190f8a7519becd9de2081832be309a99`
+
+| Testnet
+| `15f0dacc1060e91818224a94286b13aa04279c640bd5d6f193182031d133df7c`
+
+|===
+
+=== Mainnet
+
+The Mainnet is where the true Lisk economy exists.
+Within this network the Lisk users can transfer LSK tokens from one account to another, register accounts as delegates; and vote for other delegates.
+
+=== Testnet
+
+The Testnet is an independent replica of the Lisk Mainnet, whose main function is to test the upgrades first before they are run on the Lisk Mainnet.
+Subsequently, this is where new/updated versions and fixes of the Lisk Core are tested.
+
+To start using the Testnet, please download your free LSK Testnet from the {url_faucet_testnet}[Testnet faucet^].
+
+To connect to the Testnet via {url_lisk_desktop}[Lisk Desktop^], simply enable the "Network Switcher" in the settings and then use it to switch the network to `Testnet`.
+
+== Token
+
+The native token for the Lisk Mainnet is the *LSK*.
+Each LSK is further subdivided into 10^8^ [#index-beddows-1]#*beddows*#.
+
+== Custom modules
+
+Lisk Core includes the `legacyAccount` module which contains the following transaction.
+
+=== LSK Reclaim
+
+This transaction allows to access the balance that was sent to a legacy address without any associated public key.
+Legacy addresses, generated from the first eight bytes of the public key, were used in older versions of the protocol.
+This legacy address is deduced from the `senderPublicKey` of the transaction, and the amount specified in the transaction asset must correspond to the amount in the legacy account.
+
+image::ReclaimAsset.png[ReclaimAsset,330,147]
